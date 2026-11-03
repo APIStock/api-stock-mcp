@@ -1,6 +1,6 @@
 {
   "name": "api-stock",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Generate AI video, images and music with API Stock. Browse models and prices, use your prepaid balance, and fetch results through OAuth.",
   "author": {
     "name": "API Stock",
