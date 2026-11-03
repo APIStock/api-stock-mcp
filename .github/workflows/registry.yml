@@ -1,0 +1,52 @@
+name: Validate and publish the MCP integration
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish to the official MCP registry
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "26.13.0"
+      - run: node scripts/check.mjs
+      - name: Install Claude Code validator
+        run: npm install --global @anthropic-ai/claude-code@2.1.284
+      - name: Validate plugin and marketplace
+        run: |
+          claude plugin validate --strict plugins/api-stock
+          claude plugin validate --strict .
+
+  publish:
+    if: github.event_name == 'workflow_dispatch' && inputs.publish && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned MCP publisher
+        run: |
+          curl --fail --silent --show-error --location --max-time 60 https://github.com/modelcontextprotocol/registry/releases/download/v1.8.1/mcp-publisher_linux_amd64.tar.gz --output mcp-publisher.tar.gz
+          echo 'a06c9096dcb9727c13555b6be26c7effa707b01f06a4c561ba7a3635443cf2cc  mcp-publisher.tar.gz' | sha256sum --check
+          tar -xzf mcp-publisher.tar.gz mcp-publisher
+      - name: Validate registry metadata
+        run: ./mcp-publisher validate registry/api-stock/server.json
+      - name: Authenticate with GitHub OIDC
+        run: ./mcp-publisher login github-oidc
+      - name: Publish API Stock
+        run: ./mcp-publisher publish registry/api-stock/server.json

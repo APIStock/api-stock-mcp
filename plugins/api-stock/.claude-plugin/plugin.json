@@ -1,0 +1,18 @@
+{
+  "name": "api-stock",
+  "version": "1.0.0",
+  "description": "Generate AI video, images and music with API Stock. Browse models and prices, use your prepaid balance, and fetch results through OAuth.",
+  "author": {
+    "name": "API Stock",
+    "url": "https://api-stock.com"
+  },
+  "homepage": "https://docs.api-stock.com/docs/mcp",
+  "license": "MIT",
+  "keywords": ["mcp", "video", "image", "music", "ai"],
+  "mcpServers": {
+    "api-stock": {
+      "type": "http",
+      "url": "https://api.api-stock.com/mcp"
+    }
+  }
+}
