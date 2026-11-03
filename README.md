@@ -9,6 +9,11 @@ The server is hosted; there is nothing to install or run. You sign in with
 your API Stock account through OAuth in the browser, so no API key ever goes
 into a config file.
 
+Tool discovery is public: clients can initialize the connection and list tool
+descriptions and input schemas before signing in. Every tool call, including
+model browsing, requires OAuth. Clients can start sign-in when a tool call
+returns an HTTP 401 challenge, or you can authenticate explicitly during setup.
+
 - Endpoint: `https://api.api-stock.com/mcp` (Streamable HTTP)
 - Docs: <https://docs.api-stock.com/docs/mcp>
 - Official MCP Registry: `io.github.APIStock/api-stock`

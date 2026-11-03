@@ -3,12 +3,24 @@
   "name": "io.github.APIStock/api-stock",
   "title": "API Stock",
   "description": "Generate AI video, images and music. Browse models and prices; OAuth and one prepaid balance.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "websiteUrl": "https://docs.api-stock.com/docs/mcp",
   "remotes": [
     {
       "type": "streamable-http",
       "url": "https://api.api-stock.com/mcp"
+    }
+  ],
+  "icons": [
+    {
+      "src": "https://api-stock.com/brand/api-stock/icon.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": ["any"]
+    },
+    {
+      "src": "https://api-stock.com/brand/api-stock/icon-32.png",
+      "mimeType": "image/png",
+      "sizes": ["32x32"]
     }
   ]
 }
