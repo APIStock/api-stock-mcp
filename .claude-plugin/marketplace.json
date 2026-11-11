@@ -1,0 +1,18 @@
+{
+  "name": "api-stock",
+  "owner": {
+    "name": "API Stock",
+    "url": "https://api-stock.com"
+  },
+  "metadata": {
+    "description": "AI media generation with API Stock"
+  },
+  "plugins": [
+    {
+      "name": "api-stock",
+      "source": "./plugins/api-stock",
+      "description": "Generate AI video, images and music with API Stock. Browse models and prices, use your prepaid balance, and fetch results through OAuth.",
+      "version": "1.1.0"
+    }
+  ]
+}
